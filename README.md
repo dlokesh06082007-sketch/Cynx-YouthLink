@@ -5,7 +5,7 @@
 ---
 
 ## 📌 Overview
-**YouthLink** is a comprehensive support system explicitly designed for adolescent mental health and emotional wellbeing. It bridges the critical gap between youth facing extreme academic/social pressures and established outreach organizations (like the Youngistaan Foundation). 
+**YouthLink** is a comprehensive support system explicitly designed for adolescent mental health and emotional wellbeing. It bridges the critical gap between youth facing extreme academic/social pressures and established outreach organizations. 🎯 **Mission**: Building a world where asking for help is a sign of strength, not a reason for fear.
 
 By providing anonymous help-seeking channels and early intervention mechanisms, YouthLink ensures that the 90% of youth in low-income settings who currently receive absolutely no psychiatric care finally have a safe, dynamic entry point to targeted support.
 
