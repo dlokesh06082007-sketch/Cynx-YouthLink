@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouthLink - Mentor Command Center</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#030A14",
+                        teal: {
+                            glow: "#00E5FF",
+                            dark: "#005b66"
+                        }
+                    },
+                    fontFamily: {
+                        headline: ["Plus Jakarta Sans", "sans-serif"],
+                        body: ["Manrope", "sans-serif"]
+                    },
+                    animation: {
+                        'float': 'float 7s ease-in-out infinite',
+                        'float-reverse': 'float-reverse 9s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'float-reverse': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(10px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 0.1, transform: 'scale(1)' },
+                            '50%': { opacity: 0.25, transform: 'scale(1.1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        body { background-color: #030A14; overflow-x: hidden; }
+        
+        .glass-panel {
+            background: rgba(14, 25, 45, 0.45);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(0, 229, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .glass-panel:hover {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(0, 229, 255, 0.1);
+        }
+
+        .glow-accent { 
+            filter: blur(100px); 
+            z-index: -1; 
+            pointer-events: none; 
+        }
+
+        .holographic-text {
+            color: #E0FFFF;
+            text-shadow: 0 0 10px rgba(0, 229, 255, 0.6), 0 0 20px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Ambient Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 229, 255, 0.5); }
+    </style>
+</head>
+<body class="font-body text-slate-300 min-h-screen relative flex flex-col">
+    <!-- Atmospheric Orbs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] rounded-full bg-blue-900/40 glow-accent animate-pulse-glow"></div>
+        <div class="absolute bottom-[-15%] right-[-10%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-teal-glow/20 glow-accent animate-pulse-glow" style="animation-delay: 2s;"></div>
+        <div class="absolute top-[35%] left-[35%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-indigo-600/15 glow-accent animate-pulse-glow" style="animation-delay: 1s;"></div>
+    </div>
+
+    <!-- Top Command Navigation -->
+    <header class="w-full z-50 glass-panel border-b border-t-0 border-r-0 border-l-0 border-teal-glow/10 py-4 px-6 md:px-10 flex justify-between items-center sticky top-0 rounded-none shadow-none">
+        <div class="flex items-center gap-4">
+            <span class="material-symbols-outlined text-teal-glow text-3xl shrink-0" style="text-shadow: 0 0 15px rgba(0, 229, 255, 0.5);">stream</span>
+            <div class="flex flex-col">
+                <span class="font-headline text-2xl font-bold text-white tracking-widest holographic-text uppercase text-sm leading-none">Mentor Control</span>
+                <span class="text-[10px] tracking-widest text-teal-glow/70 uppercase pt-1">YouthLink Substation Alpha</span>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <button class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <img src="https://ui-avatars.com/api/?name=NGO+Admin&background=00E5FF&color=050B14&rounded=true" alt="Mentor Profile" class="w-10 h-10 rounded-full border-2 border-teal-glow shadow-[0_0_15px_rgba(0,229,255,0.3)]">
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Command Grid (2x2 Quad Layout) -->
+    <main class="flex-grow p-6 md:p-8 z-10 w-full max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch pt-12 pb-12">
+        
+        <!-- 1: Early Warning Triage -->
+        <section class="glass-panel rounded-3xl p-6 flex flex-col h-[400px] animate-float relative overflow-hidden group">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-rose-500/10 blur-2xl group-hover:bg-rose-500/20 transition-colors"></div>
+            
+            <div class="flex justify-between items-center mb-6 relative z-10">
+                <h2 class="font-headline text-sm uppercase tracking-[0.2em] font-bold text-white flex items-center gap-3">
+                    <span class="material-symbols-outlined text-rose-400 text-xl">warning</span>
+                    Early Warning Triage
+                </h2>
+                <span class="bg-rose-500/10 text-rose-500 text-[10px] font-bold px-2 py-1 rounded border border-rose-500/20">Data-Driven Insights</span>
+            </div>
+            
+            <p class="text-xs text-slate-400 mb-4 tracking-wide relative z-10">Flags users whose "Nature" assessment indicates immediate care is needed.</p>
+            
+            <div class="flex-grow space-y-3 overflow-y-auto pr-2 pb-2 relative z-10">
+                <!-- Triage Card -->
+                <div class="p-4 rounded-xl bg-black/40 border border-rose-500/30 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-white font-bold text-sm">Anonymous User #8824</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">Nature Assessment: Severe Anxiety Spikes</p>
+                    </div>
+                    <button class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 text-xs px-4 py-2 rounded-lg font-bold transition border border-rose-500/30">Review Data</button>
+                </div>
+                <!-- Triage Card -->
+                <div class="p-4 rounded-xl bg-black/40 border border-rose-500/30 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-white font-bold text-sm">Anonymous User #9211</h3>
+                        <p class="text-[11px] text-slate-400 mt-1">Nature Assessment: Depressive Isolation</p>
+                    </div>
+                    <button class="bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 text-xs px-4 py-2 rounded-lg font-bold transition border border-rose-500/30">Review Data</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2: 1-1 Networking Workspace -->
+        <section class="glass-panel rounded-3xl flex flex-col h-[400px] overflow-hidden animate-float-reverse">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-black/20">
+                <h2 class="font-headline text-sm uppercase tracking-[0.2em] font-bold text-white flex items-center gap-3">
+                    <span class="material-symbols-outlined text-teal-glow text-xl">forum</span>
+                    1-1 Networking Workspace
+                </h2>
+                <span class="text-teal-glow text-[10px] font-bold px-2 py-1 bg-teal-glow/10 rounded border border-teal-glow/20 shadow-[0_0_10px_rgba(0,229,255,0.2)]">Volunteer-Led</span>
+            </div>
+            
+            <div class="px-6 pt-4 pb-2 text-xs text-slate-400 tracking-wide border-b border-white/5">
+                Community-rooted support structures via anonymous chats.
+            </div>
+
+            <!-- Chat Viewport -->
+            <div class="flex-grow p-6 flex flex-col justify-end gap-5 overflow-y-auto">
+                <div class="flex gap-4 flex-row-reverse">
+                    <div class="w-8 h-8 rounded-full bg-slate-800 border-2 border-slate-600 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
+                        <span class="material-symbols-outlined text-sm text-slate-400">person</span>
+                    </div>
+                    <div class="bg-black/40 border border-white/10 p-3 rounded-2xl rounded-tr-sm text-sm text-slate-300 backdrop-blur-md">
+                        I just feel entirely disconnected lately. Like nobody gets it.
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <img src="https://ui-avatars.com/api/?name=Dr+Mentor&background=00E5FF&color=050B14" class="w-8 h-8 rounded-full border border-teal-glow/40 shadow-[0_0_10px_rgba(0,229,255,0.3)] shrink-0" alt="Avatar">
+                    <div class="bg-teal-glow/10 border border-teal-glow/30 p-3 rounded-2xl rounded-tl-sm text-sm text-slate-200">
+                        That disconnection is incredibly hard. This anonymous space is here so you don't have to carry it entirely alone.
+                    </div>
+                </div>
+            </div>
+            <!-- Input Area -->
+            <div class="p-4 bg-black/30 border-t border-white/10">
+                <div class="relative flex items-center">
+                    <input type="text" placeholder="Type supportive response..." class="w-full bg-white/5 border border-white/10 rounded-full py-2.5 pl-4 pr-12 text-sm text-white focus:ring-1 focus:ring-teal-glow focus:border-teal-glow outline-none">
+                    <button class="absolute right-2 p-1.5 rounded-full bg-teal-glow text-background shrink-0">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3: NGO Visibility Hub -->
+        <section class="glass-panel rounded-3xl p-6 flex flex-col h-[400px] animate-float relative overflow-hidden" style="animation-delay: 1.5s;">
+            <div class="absolute top-0 left-0 w-32 h-32 bg-indigo-500/10 blur-2xl"></div>
+            
+            <div class="flex justify-between items-center mb-6 relative z-10">
+                <h2 class="font-headline text-sm uppercase tracking-[0.2em] font-bold text-white flex items-center gap-3">
+                    <span class="material-symbols-outlined text-indigo-400 text-xl">monitoring</span>
+                    NGO Visibility Hub
+                </h2>
+                <span class="text-indigo-400 text-[10px] font-bold px-2 py-1 bg-indigo-500/10 rounded border border-indigo-500/20">Social Impact Monitoring</span>
+            </div>
+            
+            <p class="text-xs text-slate-400 mb-6 tracking-wide relative z-10">Structured data to monitor youth wellbeing indicators globally.</p>
+            
+            <div class="grid grid-cols-2 gap-4 flex-grow relative z-10">
+                <!-- Stat Card -->
+                <div class="bg-black/30 border border-indigo-500/20 rounded-2xl p-4 flex flex-col justify-center text-center">
+                    <span class="material-symbols-outlined text-indigo-400 mb-2">groups</span>
+                    <p class="text-[10px] uppercase tracking-widest text-slate-400">Total Mentorships</p>
+                    <p class="text-3xl font-bold text-white mt-1">18</p>
+                </div>
+                <!-- Stat Card -->
+                <div class="bg-black/30 border border-indigo-500/20 rounded-2xl p-4 flex flex-col justify-center text-center">
+                    <span class="material-symbols-outlined text-indigo-400 mb-2">sentiment_very_satisfied</span>
+                    <p class="text-[10px] uppercase tracking-widest text-slate-400">Impact Resolution</p>
+                    <p class="text-3xl font-bold text-white mt-1">84<span class="text-xl text-indigo-400">%</span></p>
+                </div>
+                <div class="col-span-2 bg-black/30 border border-indigo-500/20 rounded-2xl p-4 flex items-center justify-between mt-2">
+                    <p class="text-xs text-slate-300">Monthly Wellbeing Indicator Growth</p>
+                    <div class="flex items-center gap-1 text-teal-glow">
+                        <span class="material-symbols-outlined text-sm">trending_up</span>
+                        <span class="text-sm font-bold">+12%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="mt-4 w-full py-3 rounded-xl border border-indigo-500/30 text-indigo-300 text-xs font-bold tracking-widest uppercase hover:bg-indigo-500/10 transition relative z-10">Export Structured Data</button>
+        </section>
+
+        <!-- 4: Resource Deployment -->
+        <section class="glass-panel rounded-3xl p-6 flex flex-col h-[400px] animate-float-reverse relative overflow-hidden group" style="animation-delay: 2.5s;">
+            <div class="absolute bottom-0 right-0 w-32 h-32 bg-amber-500/10 blur-2xl group-hover:bg-amber-500/20 transition-colors"></div>
+            
+            <div class="flex justify-between items-center mb-6 relative z-10">
+                <h2 class="font-headline text-sm uppercase tracking-[0.2em] font-bold text-white flex items-center gap-3">
+                    <span class="material-symbols-outlined text-amber-400 text-xl">deployed_code</span>
+                    Resource Deployment
+                </h2>
+                <span class="text-amber-400 text-[10px] font-bold px-2 py-1 bg-amber-500/10 rounded border border-amber-500/20">At-Risk Adolescent Tools</span>
+            </div>
+            
+            <p class="text-xs text-slate-400 mb-6 tracking-wide relative z-10">Direct portal to manually push youth-friendly digital wellbeing tools directly to tracked users.</p>
+            
+            <div class="flex-grow space-y-4 relative z-10 overflow-y-auto pr-2 pb-2">
+                <!-- Tool Deploy Item -->
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-amber-500/30 transition group/btn">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20">
+                        <span class="material-symbols-outlined text-amber-400 text-lg">self_improvement</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-white text-sm font-bold">Grounding Exercises Module</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Push breathing techniques to active chat sessions.</p>
+                    </div>
+                    <button class="material-symbols-outlined text-slate-500 group-hover/btn:text-amber-400 transition" style="font-variation-settings: 'FILL' 1;">cloud_upload</button>
+                </div>
+                <!-- Tool Deploy Item -->
+                <div class="flex items-center gap-4 p-4 rounded-xl bg-black/40 border border-white/5 hover:border-amber-500/30 transition group/btn">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/10 flex items-center justify-center shrink-0 border border-amber-500/20">
+                        <span class="material-symbols-outlined text-amber-400 text-lg">menu_book</span>
+                    </div>
+                    <div class="flex-grow">
+                        <h3 class="text-white text-sm font-bold">Interactive Journal Prompt</h3>
+                        <p class="text-[10px] text-slate-400 mt-1">Deploy structured reflection questions.</p>
+                    </div>
+                    <button class="material-symbols-outlined text-slate-500 group-hover/btn:text-amber-400 transition" style="font-variation-settings: 'FILL' 1;">cloud_upload</button>
+                </div>
+            </div>
+            
+            <button class="mt-4 w-full py-3 rounded-xl border border-amber-500/30 text-amber-300 text-xs font-bold tracking-widest uppercase hover:bg-amber-500/10 transition relative z-10 border-dashed">Deploy Custom Digital Tool</button>
+        </section>
+
+    </main>
+</body>
+</html>
